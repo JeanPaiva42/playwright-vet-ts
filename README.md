@@ -1,6 +1,9 @@
 # playwright-vet-ts
 Small set of playwright tests to vetspire
 
+### To run the tests:
+
+- To run the tests we can simply use `npm run test`
 ### Observations:
 
 - Some of these tests are very small, and some of them had their assertions moved to a single test case just so we could get closer to tests that follow (AAA pattern).
