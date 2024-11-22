@@ -5,8 +5,8 @@ import PricingPage from "../../pageComponents/PricingPage";
 
 
 
-export const clickOnContactSales = async (page: Page) => {
+export const clickOnContactSales = async (page: Page): Promise<void> => {
     const pricingPage = new PricingPage(page);
-    return (await pricingPage.contactSalesButton())
-        .click();
+    const contactSalesButton = await pricingPage.contactSalesButton();
+    await contactSalesButton.click();
 }

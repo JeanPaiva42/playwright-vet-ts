@@ -1,49 +1,45 @@
+import { Page } from 'playwright-core';
 import BaseComponent from '../BaseComponent';
 
 class scheduleADemoModal extends BaseComponent {
 
     iframeLocation: string = 'iframe[title="Select a Date \\& Time - Calendly"]';
 
-    constructor(page: any) {
+    constructor(page: Page) {
         super(page)
     }
 
-    async typeOfPracticeOrOrganization() {
+    async typeOfPracticeOrOrganization(): Promise<Locator> {
         return (await this.page.locator(this.iframeLocation)
             .contentFrame().getByLabel('What is the type of your'))
     }
 
-    async dropdownOptions(userChoice: string) {
+    async dropdownOptions(userChoice: string): Promise<Locator> {
         return (await this.page
             .locator(this.iframeLocation).contentFrame()
             .getByRole('option', { name: userChoice })).first()
     }
 
-    async demoModalTitle() {
+    async demoModalTitle(): Promise<Locator> {
         return (await (this.page.locator('has(div):(has-text("Vetspire Demo"))')).first())
     }
 
-    async submitPracticeButton() {
+    async submitPracticeButton(): Promise<Locator> {
 
         return (await (this.page.locator(this.iframeLocation)
             .contentFrame().getByRole('button', { name: 'Submit' })).first())
     }
 
     // not really a button, but...
-    async closeModalButton() {
+    async closeModalButton(): Promise<Locator> {
         return (await (this.page.locator('div .calendly-popup-close')).first())
     }
 
-    async calendlyMeetingDurationText() {
+    async calendlyMeetingDurationText(): Promise<Locator> {
         return (await (this.page.locator(this.iframeLocation)
             .contentFrame().getByText('1 hr')).first())
     }
 
-
-    // // Verify the selection
-    // const selectedValue = await page.$eval('select#dropdownId', select => select.value);
-    // expect(selectedValue).toBe('value1');
-    // });
 }
 
 export default scheduleADemoModal;

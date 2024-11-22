@@ -3,14 +3,17 @@ import FeaturesPage from "../../pageComponents/FeaturesDropdown";
 import { test, expect } from '@playwright/test';
 
 var featuresPage: FeaturesPage;
+const baseUrl: string = 'https://vetspire.com/';
 
 test.describe('Verifies the Feature dropdown and sections', async () => {
-  const baseUrl: string = 'https://vetspire.com/';
-  test('confirms that dropdown options are correctly loaded and we are taken to Analytics Page', async ({ page }) => {
-    const analyticsUrl: string = baseUrl + '#analytics';
-    featuresPage = new FeaturesPage(page);
 
+  test.beforeEach(async ({ page }) => {
     await page.goto(baseUrl);
+    featuresPage = new FeaturesPage(page);
+  });
+
+  test('navigates to Analytics Page from Features dropdown', async ({ page }) => {
+    const analyticsUrl: string = baseUrl + '#analytics';
 
     await userAttemptsTo.hoverFeaturesLink(page);
 
@@ -23,16 +26,14 @@ test.describe('Verifies the Feature dropdown and sections', async () => {
     await expect(page).toHaveURL(analyticsUrl);
   })
 
-  test('confirms that users are taken to the Scheduling page', async ({ page }) => {
+  test('navigates to Scheduling Page from Features dropdown', async ({ page }) => {
     const schedulingUrl: string = baseUrl + '#scheduling';
-    featuresPage = new FeaturesPage(page);
-
-    await page.goto(baseUrl);
 
     await userAttemptsTo.hoverFeaturesLink(page);
 
     expect(await featuresPage.schedulingLink()).toBeVisible();
-    await (await featuresPage.schedulingLink()).click();
+
+    await userAttemptsTo.clickSchedulingLink(page);
 
     await expect(page).toHaveURL(schedulingUrl);
   })

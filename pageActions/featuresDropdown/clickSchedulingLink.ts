@@ -1,8 +1,8 @@
 import FeaturesPage from "../../pageComponents/FeaturesDropdown";
 import { Page } from '@playwright/test';
 
-export const clickSchedulingLink = async (page: Page) => {
+export const clickSchedulingLink = async (page: Page): Promise<void> => {
     const featuresPage = new FeaturesPage(page);
-    return (await featuresPage.schedulingLink())
-        .click();
+    const schedulingLink = await featuresPage.schedulingLink();
+    await schedulingLink.click();
 }

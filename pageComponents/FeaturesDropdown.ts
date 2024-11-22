@@ -1,18 +1,30 @@
+import { Page } from 'playwright-core';
 import BaseComponent from '../BaseComponent';
 
 class FeaturesDropdown extends BaseComponent {
 
-    constructor(page: any) {
+    constructor(page: Page) {
         super(page)
     }
 
-    async featuresLink() { return (await this.page.locator('div:has(a):has-text("Features")').first()) }
+    async getRoleByLinks(linkName: string): Promise<Locator> {
+        return this.page.getByRole('link', { name: linkName }).first();
+    }
+    async featuresHeaderLink(): Promise<Locator> {
+        return (this.page.locator('div:has(a):has-text("Features")').first())
+    }
 
-    async schedulingLink() { return (await this.page.getByRole('link', { name: 'Scheduling Appointment' })).first() }
+    async schedulingLink(): Promise<Locator> {
+        return this.getRoleByLinks('Scheduling Appointment')
+    }
 
-    async analyticsLink() { return (await this.page.getByRole('link', { name: 'Analytics Financial reporting' })).first() }
+    async analyticsLink(): Promise<Locator> {
+        return this.getRoleByLinks('Analytics Financial reporting')
+    }
 
-    async patientFlowLink() { return (await this.page.getByRole('link', { name: 'Patient Flow Manage your' })).first() }
+    async patientFlowLink(): Promise<Locator> {
+        return this.getRoleByLinks('Patient Flow Manage your')
+    }
 }
 
 export default FeaturesDropdown;

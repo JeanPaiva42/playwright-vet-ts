@@ -1,8 +1,8 @@
 import MainPage from "../../pageComponents/MainPage";
 import { Page } from '@playwright/test';
 
-export const clickOnScheduleADemoButton = async (page: Page) => {
+export const clickOnScheduleADemoButton = async (page: Page): Promise<void> => {
     const mainPage = new MainPage(page);
-    return (await mainPage.scheduleADemoButton())
-        .click();
+    const scheduleADemoButton = await mainPage.scheduleADemoButton();
+    await scheduleADemoButton.click();
 }

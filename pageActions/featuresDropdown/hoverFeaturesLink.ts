@@ -1,8 +1,8 @@
 import MainPage from "../../pageComponents/MainPage";
 import { Page } from '@playwright/test';
 
-export const hoverFeaturesLink = async (page: Page) => {
+export const hoverFeaturesLink = async (page: Page): Promise<void> => {
     const mainPage = new MainPage(page);
-    return (await mainPage.featuresLink())
-        .hover();
+    const featuresLink = await mainPage.featuresLink();
+    await featuresLink.hover();
 }

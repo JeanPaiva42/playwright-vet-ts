@@ -12,7 +12,8 @@
     "target": "ESNext",
     "lib": [
       "ESNext",
-      "DOM"
+      "DOM",
+      "ES2015"
     ],
     // "jsx": "preserve",                                /* Specify what JSX code is generated. */
     // "experimentalDecorators": true,                   /* Enable experimental support for legacy experimental decorators. */
